@@ -1,0 +1,8 @@
+! OpenMP parallel region and a worksharing-loop construct
+
+!$omp parallel
+   !$omp do
+      do i = 1, N
+         a(i) = a(i) + b(i)
+   !$omp end do
+!$omp end parallel

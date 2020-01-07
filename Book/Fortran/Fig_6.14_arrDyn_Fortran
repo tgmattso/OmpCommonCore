@@ -1,0 +1,9 @@
+   integer :: vptr
+   real, allocatable :: vptr(:)
+   
+   allocate (vptr(1000)) 
+   call initv(1000, vptr)   ! function to initialize the array
+    
+!$omp parallel firstprivate(vptr)
+   ! body of parallel region not shown
+!$omp end parallel 

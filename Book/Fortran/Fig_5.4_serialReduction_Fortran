@@ -1,0 +1,9 @@
+integer :: i
+real*8 :: ave, A(N)
+
+call Init(A,N)
+
+do i = 1, N
+   ave = ave + A(i)
+enddo
+ave = ave/N

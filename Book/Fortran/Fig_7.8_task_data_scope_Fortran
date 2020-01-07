@@ -1,0 +1,8 @@
+!$omp parallel shared(A) private(B) 
+   ...
+   !$omp task
+      integer :: C
+      call compute(A, B, C)
+   !$omp end task
+!$omp end parallel
+

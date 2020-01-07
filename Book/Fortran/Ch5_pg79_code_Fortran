@@ -1,0 +1,11 @@
+The following pattern with a pair of OpenMP constructs, one to create the team of threads and the other to split up loop iterations among threads, is very common.
+!$omp parallel 
+   !$omp do
+      do-loop
+   !$omp end do
+!$omp end parallel
+
+As a convenience, these two directives can be combined into a single directive.
+!$omp parallel do
+    do-loop
+!$omp end parallel do

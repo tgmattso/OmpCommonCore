@@ -1,0 +1,29 @@
+integer :: flag   ! a flag to communicate when the consumer can start
+integer :: id, nthrd
+flag = 0
+
+call omp_set_num_threads(2)
+   
+!$omp parallel shared(A, flag) private(id, nthrd)
+   id = omp_get_thread_num()
+   nthrds = omp_get_num_threads()
+     
+   ! we need two or more threads for this program
+   if ((id == 0) .and. (nthrds < 2)) stop -1
+     
+   if (id == 0) then 
+      call produce(A)
+      !$omp atomic write seq_cst
+         flag = 1
+      !$omp end atomic
+   endif
+
+   if (id == 1) then
+      do while(1)
+         !$omp atomic read seq_cst
+            flag_temp = flag
+         if (flag_temp /= 0) exit
+      enddo
+     call consume(A)
+   endif
+!$omp end parallel

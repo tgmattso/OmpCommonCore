@@ -1,0 +1,16 @@
+// Sequential code with loop dependence
+int i, j, A[MAX];
+j = 5;
+for (i = 0; i < MAX; i++) {
+   j += 2;
+   A[i] = big(j);
+}
+
+// Parallel code with loop dependence removed
+
+int i, A[MAX];
+#pragma omp parallel for
+   for (i = 0; i < MAX; i++) { 
+      int j = 5 + 2*(i+1);
+      A[i] = big(j); 
+   }

@@ -1,0 +1,6 @@
+p => head
+do
+   call processwork(p)
+   p => p%next
+   if (.not. associated(p)) exit
+end do

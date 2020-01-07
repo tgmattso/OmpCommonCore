@@ -1,0 +1,7 @@
+   integer :: i
+   ID = omp_get_thread_num()
+   numthreads = omp_get_num_threads()
+
+   do i = ID + 1, num_steps, numthreads
+      ! body of the loop
+   end do 

@@ -1,0 +1,2 @@
+  for (init-expr; test-expr; incr-expr)
+     structured block

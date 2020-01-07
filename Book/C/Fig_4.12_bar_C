@@ -1,0 +1,13 @@
+double Arr[8], Brr[8];            
+int numthrds;
+omp_set_num_threads(8)
+#pragma omp parallel
+{    
+   int id, nthrds;
+   id = omp_get_thread_num();
+   nthrds = omp_get_num_threads();
+   if (id == 0) numthrds = nthrds;  
+   Arr[id] = lots_of_work(id, nthrds);
+#pragma omp barrier
+   Brr[id] = needs_all_of_Arr(id, nthrds, Arr);
+} // end of parallel region

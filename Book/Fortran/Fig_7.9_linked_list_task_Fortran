@@ -1,0 +1,12 @@
+!$omp parallel 
+   !$omp single
+      p => head
+      do
+         !$omp task firstprivate(p)
+            call processwork(p)
+         !$omp end task
+         p => p%next
+         if (.not. associated(p)) exit
+      end do
+   !$omp end single
+!$omp end parallel 

@@ -1,0 +1,20 @@
+# for g++ compiler on Apple OS-X
+#
+# Note: gcc on Apple systems defaults to the Xcode Clang compiler.
+# This compiler doesn't know OpenMP.  You must download a real
+# gun compiler which in my case is gcc-9
+#
+FC          = gfortran-9
+CC          = gcc-9
+FLINKER     = $(FC)
+CLINKER     = $(CC)
+OPTFLAGS    = -fopenmp -DAPPLE -O3
+LIBS        = -lm
+PRE         = ./
+
+CFLAGS	  = $(OPTFLAGS)
+FFLAGS	  = $(OPTFLAGS)
+
+OBJ=o
+EXE=
+RM=rm -f

@@ -1,0 +1,11 @@
+#pragma omp parallel shared(A, B, sum)
+{
+   int id = omp_get_thread_num();
+   int nthrds = omp_get_num_threads();
+   #pragma omp for reduction(+:sum) nowait
+      for (int i = 0; i < N; i++) {
+         sum += big_job(A,N); 
+      }
+   bigger_job(B, id);     // a function that does not use A
+   another_job(sum, id);  // sum may not be available
+}

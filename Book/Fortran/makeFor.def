@@ -1,0 +1,28 @@
+#
+# Authors: Tim Mattson (based on the make.def from Scott McMillan) 
+#
+
+PLATFORM := $(shell uname -s)
+
+FOR		= UNKNOW_PLATFORM
+
+ifeq ($(PLATFORM),Linux)
+	FOR	= gfortran -fopenmp
+	OPTS	= -g
+	DEFS	=
+	INCLUDE	= 
+#	LIB	= -lm -Wl,-rpath,$(LIBDIR) -L$(LIBDIR)
+endif
+
+ifeq ($(PLATFORM),Darwin)
+	FOR	= gfortran  -fopenmp
+	OPTS	= -g
+	#WFLAGS	= -Wall
+	WFLAGS	= 
+	DEFS	=
+	#INCLUDE = -I$(INCDIR)
+	INCLUDE	= 
+        #LIB	= -lm 
+endif
+
+FORFLAGS	= $(OPTS) $(WFLAGS) $(DEFS) $(INCLUDE)

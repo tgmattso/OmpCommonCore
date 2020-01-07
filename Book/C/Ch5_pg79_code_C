@@ -1,0 +1,9 @@
+The following pattern with a pair of OpenMP constructs, one to create the team of threads and the other to split up loop iterations among threads, is very common.
+   #pragma omp parallel
+   {
+      #pragma omp for
+         for-loop
+   }
+As a convenience, these two directives can be combined into a single directive.
+   #pragma omp parallel for
+      for-loop

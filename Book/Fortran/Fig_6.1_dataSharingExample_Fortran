@@ -1,0 +1,28 @@
+! File #1:
+module data_mod
+   real*8 :: A(10)
+end module data_mod
+
+program main
+   use data_mod
+   implicit none
+   integer :: index(10)
+   !$omp parallel 
+      call work(index)
+   !$omp end parallel 
+   print *, index(1) 
+end program main
+
+
+! File #2:
+subroutine work(index) 
+   use data_mod
+   implicit none
+   integer :: index
+   real*8 :: temp(10) 
+   integer, save :: count 
+   ...
+end subroutine work
+
+
+

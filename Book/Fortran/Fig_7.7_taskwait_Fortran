@@ -1,0 +1,15 @@
+!$omp parallel
+   !$omp single
+      !$omp task
+         call fred() 
+      !$omp end task
+      !$omp task
+         call daisy() 
+      !$omp end task
+      !$omp taskwait
+      !$omp task
+         call billy() 
+      !$omp end task
+   !$omp end single
+!$omp end parallel
+

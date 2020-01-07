@@ -1,0 +1,22 @@
+! File #1
+module data_mod
+   integer :: tmp
+end module data_mod
+
+subroutine danger()
+   implicit none
+   integer :: tmp
+   tmp = 0
+   !$omp parallel private(tmp)
+       call work() 
+   !$omp end parallel
+   print *, tmp     ! tmp has unspecified value
+end subroutine danger
+
+! File #2
+subroutine work() 
+   use data_mod
+   implicit none
+   tmp = 5
+end subroutine work
+

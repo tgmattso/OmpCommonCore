@@ -1,0 +1,7 @@
+integer :: i
+
+!$omp do lastprivate(ierr)
+    do i = 1, N
+       ierr = work(i)
+    enddo
+!$omp end do

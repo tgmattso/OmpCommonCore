@@ -1,0 +1,5 @@
+   ID = omp_get_thread_num();
+   numthreads = omp_get_num_threads();
+   for (int i = ID; i < num_steps; i = i + numthreads) {
+      // body of the loop
+   }

@@ -1,0 +1,14 @@
+
+This directory includes a test bed for working with matrix
+multiplication algorithms.  Currently, we only cover the case
+of dense matrices.
+
+The program generates two different matrices with analytic answers.
+One is with constant matrices.  This is easy to scale to any size
+and easy to implement.  It's also too forgiving.
+
+The progression matrix is a more complex matrix with nonconstant values.
+Testing with a progression matrix is much more stringent.
+
+For each case, the program runs multiple times and minimum, maximum and
+average MFLOPS are reported.

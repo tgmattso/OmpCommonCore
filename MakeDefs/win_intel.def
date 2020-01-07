@@ -1,0 +1,16 @@
+# for Intel compiler on windows
+# Note: Untested (we don't have Windows systems)
+FC          = ifort
+CC          = icl
+FLINKER     = $(FC)
+CLINKER     = $(FC)
+OPTFLAGS    = /Qopenmp  /Qstd=c99 
+LIBS        =
+PRE         =
+
+CFLAGS	  = $(OPTFLAGS) 
+FFLAGS	  = $(OPTFLAGS) 
+
+OBJ=obj
+EXE=.exe
+RM=del

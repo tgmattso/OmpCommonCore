@@ -1,0 +1,9 @@
+#pragma omp parallel shared(A) private(B) 
+{
+   ...
+   #pragma omp task
+   {
+      int C;
+      compute(A, B, C);
+   }
+}

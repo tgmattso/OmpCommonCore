@@ -1,0 +1,15 @@
+#
+#  For PGI compilers running on a CPU based system
+#  Note: this has not been tested
+FC          = pgf90
+CC          = pgcc
+CLINKER     = $(CC)
+FLINKER     = $(FC)
+OPTFLAGS    = -mp -fast 
+LIBS        =
+
+FFLAGS	  = $(OPTFLAGS) 
+
+OBJ=o
+EXE=.exe
+RM=rm 

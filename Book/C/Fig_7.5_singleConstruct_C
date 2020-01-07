@@ -1,0 +1,9 @@
+#pragma omp parallel
+{ 
+   do_many_things();
+   #pragma omp single	
+      { 
+         exchange_boundaries();   
+      }
+   do_many_other_things();
+} 

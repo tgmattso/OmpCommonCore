@@ -1,0 +1,5 @@
+p = head;
+while (p != NULL) { 
+   processwork (p);
+   p = p->next;
+} 

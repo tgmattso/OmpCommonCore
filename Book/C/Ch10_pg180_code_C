@@ -1,0 +1,3 @@
+#pragma omp for lastprivate(ierr)
+    for (int i = 0; i < N; i++)
+       ierr = work(i);

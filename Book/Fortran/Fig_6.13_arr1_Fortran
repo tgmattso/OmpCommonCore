@@ -1,0 +1,6 @@
+      int varray(1000)
+      call initv(1000, varray)     ! function to initialize the array
+     
+      !$omp parallel private(varray)
+         ! body of parallel region not shown
+      !$omp end parallel

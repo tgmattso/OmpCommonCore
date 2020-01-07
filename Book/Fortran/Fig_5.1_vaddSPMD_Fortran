@@ -1,0 +1,14 @@
+! OpenMP parallel region and SPMD pattern
+
+integer :: id, i, Nthrds, istart, iend
+
+!$omp parallel private(id,i,istart,iend,Nthrds)
+   id = omp_get_thread_num()
+   Nthrds = omp_get_num_threads() 
+   istart = id * N / Nthrds + 1
+   iend = (id + 1) * N / Nthrds
+   if (id == Nthrds - 1) iend = N 
+   do i = istart, iend
+      a(i) = a(i) + b(i)
+   end do
+!$omp end parallel

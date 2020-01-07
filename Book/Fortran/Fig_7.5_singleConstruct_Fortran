@@ -1,0 +1,7 @@
+!$omp parallel
+   call do_many_things()
+   !$omp single	
+      call exchange_boundaries()   
+   !$omp end single	
+   call do_many_other_things()
+!$omp end parallel

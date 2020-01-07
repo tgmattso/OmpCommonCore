@@ -1,0 +1,16 @@
+# for intel compilers on OSX systems
+# Note: untested
+FC          = ifort
+CC          = icc
+FLINKER     = $(FC)
+CLINKER     = $(CC)
+OPTFLAGS    = -fopenmp -DAPPLE -O3
+LIBS        = -lm
+PRE         = ./
+
+CFLAGS	  = $(OPTFLAGS)
+FFLAGS	  = $(OPTFLAGS)
+
+OBJ=o
+EXE=
+RM=rm

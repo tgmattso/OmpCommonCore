@@ -1,0 +1,8 @@
+// OpenMP parallel region and a worksharing-loop construct
+#pragma omp parallel 
+{
+   #pragma omp for
+      for (i = 0; i < N; i++) {
+         a[i] = a[i] + b[i];
+      }
+}

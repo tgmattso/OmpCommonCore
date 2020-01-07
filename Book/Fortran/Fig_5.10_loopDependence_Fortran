@@ -1,0 +1,18 @@
+! Sequential code with loop dependence
+integer :: i, j, A(MAX)
+j = 5
+do i = 1, MAX
+   j = j + 2
+   A(j) = big(j)
+end do
+
+
+! parallel code with loop dependence removed
+integer :: i, j, A(MAX)
+!$omp parallel do private(j)
+   do i = 1, MAX
+      do j = 5 + 2*(i+1)
+         A(j) = big(j)
+      enddo 
+   end do
+!$omp end parallel do

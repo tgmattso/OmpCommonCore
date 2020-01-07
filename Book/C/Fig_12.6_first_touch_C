@@ -1,0 +1,14 @@
+//Step 1.a Initialization by initial thread only 
+   for (j = 0; j < VectorSize; j++) { 
+      a[j] = 1.0; b[j] = 2.0; c[j] = 0.0;}
+
+//Step 1.b Initialization by all threads (first touch)
+   omp_set_dynamic(0);
+   #pragma omp parallel for schedule(static)
+   for (j = 0; j < VectorSize; j++) { 
+      a[j] = 1.0; b[j] = 2.0; c[j] = 0.0;}
+
+//Step 2 Compute
+   #pragma omp parallel for schedule(static)
+   for (j = 0; j < VectorSize; j++) {
+      a[j] = b[j] + d * c[j];}

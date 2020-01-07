@@ -1,0 +1,21 @@
+double A[big], B[big], C[big];
+
+#pragma omp parallel 
+{
+   int id = omp_get_thread_num();
+   A[id] = big_calc1(id);
+
+   #pragma omp barrier 
+
+   #pragma omp for
+   for (i = 0; i < N; i++) {
+      C[i] = big_calc3(i,A);
+   }
+
+   #pragma omp for nowait
+   for (i = 0; i < N; i++) { 
+      B[i] = big_calc2(C, i); 
+   }
+
+   A[id] = big_calc4(id); 
+}

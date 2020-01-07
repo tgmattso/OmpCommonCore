@@ -1,0 +1,16 @@
+# for the gnu compiler on Cori (Xeon CPU based system at NERSC)
+
+FC          = ftn
+CC          = cc
+CLINKER     = $(FC)
+FLINKER     = $(FC)
+OPTFLAGS    = -fopenmp 
+LIBS        = -lm
+PRE         = ./
+
+FFLAGS	  = $(OPTFLAGS)
+CFLAGS	  = $(OPTFLAGS)
+
+OBJ=o
+EXE=
+RM=rm

@@ -1,0 +1,18 @@
+real*8 :: A(big), B(big), C(big)
+integer :: id
+
+!$omp parallel private(id)
+   id = omp_get_thread_num() + 1
+   A(id) = big_calc1(id)
+
+   !$omp barrier
+
+   !$omp do 
+      do i = 1, N
+         B(i) = big_calc2(C,i)
+      end do
+   !$omp enddo nowait
+
+   A(id) = big_calc4(id)
+!$omp end parallel
+

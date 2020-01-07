@@ -1,0 +1,31 @@
+$ ifort -qopenmp -DNTIMES=20 -DSTREAM_ARRAY_SIZE=64000000 -c stream.f
+$ ifort -qopenmp -o stream stream.o
+$ export OMP_DISPLAY_AFFINITY=true
+$ export OMP_AFFINITY_FORMAT="Thrd Lev=%3L, thrd_num=%5n, thrd_aff=%15A"
+$ export OMP_PLACES=threads
+$ export OMP_NUM_THREADS=8
+$ export OMP_PROC_BIND=spread
+
+$ ./stream | sort -k3   
+<stream results omitted ...>
+Thrd Lev=1  , thrd_num=0    , thrd_aff=0              
+Thrd Lev=1  , thrd_num=1    , thrd_aff=8              
+Thrd Lev=1  , thrd_num=2    , thrd_aff=16             
+Thrd Lev=1  , thrd_num=3    , thrd_aff=24             
+Thrd Lev=1  , thrd_num=4    , thrd_aff=1              
+Thrd Lev=1  , thrd_num=5    , thrd_aff=9              
+Thrd Lev=1  , thrd_num=6    , thrd_aff=17             
+Thrd Lev=1  , thrd_num=7    , thrd_aff=25   
+
+$ export OMP_PROC_BIND=close
+$ ./stream |sort -k3 
+<stream results omitted ...>
+Thrd Lev=1  , thrd_num=0    , thread_aff=0              
+Thrd Lev=1  , thrd_num=1    , thread_aff=32             
+Thrd Lev=1  , thrd_num=2    , thread_aff=2              
+Thrd Lev=1  , thrd_num=3    , thread_aff=34             
+Thrd Lev=1  , thrd_num=4    , thread_aff=4              
+Thrd Lev=1  , thrd_num=5    , thread_aff=36             
+Thrd Lev=1  , thrd_num=6    , thread_aff=6              
+Thrd Lev=1  , thrd_num=7    , thread_af=38     
+

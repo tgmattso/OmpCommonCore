@@ -1,0 +1,2 @@
+int nthreads = omp_get_num_threads();
+#pragma omp parallel if(nthreads < MaxThreads/4) num_threads(4)

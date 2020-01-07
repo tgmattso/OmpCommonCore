@@ -1,0 +1,10 @@
+int i;
+double ave = 0.0, A[N]; 
+
+InitA(A, N);
+
+#pragma omp parallel for reduction (+:ave)
+   for (i = 0; i < N; i++) { 
+       ave + = A[i];
+   }
+ave = ave/N;

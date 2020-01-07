@@ -1,0 +1,19 @@
+# for intel compiler on linux 
+# Note: untested
+FC         = ifort
+CC         = icpc
+OPTFLAGS   = -fopenmp
+
+FLINKER     = $(FC)
+CLINKER     = $(CC)
+LIBS        = -lm
+
+FFLAGS    = $(OPTFLAGS)
+
+CFLAGS    = $(OPTFLAGS)
+
+PRE= ./
+OBJ=o
+EXE=
+RM=rm
+

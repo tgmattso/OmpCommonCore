@@ -1,0 +1,17 @@
+# for g++ compiler on Linux
+# Note: untested  
+FC          = gfortran
+CC          = g++
+CLINKER     = $(CC)
+FLINKER     = $(FC)
+OPTFLAGS    = -fopenmp 
+LIBS        = -lm
+PRE         = ./
+
+FFLAGS	  = $(OPTFLAGS)
+
+CFLAGS	  = $(OPTFLAGS)
+
+OBJ=o
+EXE=
+RM=rm

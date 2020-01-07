@@ -1,0 +1,7 @@
+incr = 0
+!$omp parallel do firstprivate(incr)
+   do i = 1, MAX
+      if (mod(i,2) == 0) incr = incr + 1
+      A(i) = incr
+   end do
+!$omp end parallel do 

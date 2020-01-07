@@ -1,0 +1,21 @@
+        step = 1.0 / num_steps
+
+!$OMP PARALLEL PRIVATE(id,x,numthreads, istart,iend)
+        id = omp_get_thread_num()
+        numthreads = OMP_GET_NUM_THREADS()
+        sum(id) = 0.0
+
+        IF (id == 0)  THEN
+            nthreads = numthreads
+        ENDIF
+
+        istart = id * num_steps / numthreads + 1
+        iend = (id+1) * num_steps / numthreads
+        if (id == (numthreads -1)) iend = num_steps
+            
+        DO i = istart, iend
+           x = (i - 0.5) * step
+           sum(id) = sum(id) + 4.0 / (1.0 + x * x)
+        ENDDO
+!$OMP END PARALLEL
+

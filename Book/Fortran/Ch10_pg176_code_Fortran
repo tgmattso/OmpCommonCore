@@ -1,0 +1,6 @@
+integer :: nthreads
+nthreads = omp_get_num_threads() 
+     
+!$omp parallel if (nthreads < maxthreads/4) num_threads(4)
+...
+!$omp end parallel

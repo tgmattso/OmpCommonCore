@@ -1,0 +1,3 @@
+   do i = init, end, incr
+      structured block
+   end do

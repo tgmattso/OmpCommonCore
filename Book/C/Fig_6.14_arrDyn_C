@@ -1,0 +1,8 @@
+      int vptr;
+      vptr = (int*) malloc(1000 * sizeof(int));
+      initv(1000, vptr); // function to initialize the array
+     
+      #pragma omp parallel firstprivate(vptr)
+      {
+         // body of parallel region not shown
+      }

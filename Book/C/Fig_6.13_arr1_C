@@ -1,0 +1,7 @@
+      int varray[1000];
+      initv(1000, varray);  // function to initialize the array
+     
+      #pragma omp parallel private(varray)
+      {
+         // body of parallel region not shown
+      }

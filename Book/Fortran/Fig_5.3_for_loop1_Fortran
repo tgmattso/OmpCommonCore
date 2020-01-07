@@ -1,0 +1,7 @@
+!$omp parallel
+   !$omp do
+   do i = N, 0, -2
+      call NEAT_STUFF(i)
+   enddo
+  !$omp end do
+!$omp end parallel

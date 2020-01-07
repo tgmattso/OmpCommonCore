@@ -1,0 +1,15 @@
+#pragma omp parallel
+{ 
+   #pragma omp single
+   { 
+      p = listhead;
+      while (p) 
+      { 
+         #pragma omp task firstprivate(p)       
+         {         
+            process (p);
+         } // end of task creation
+         p = p->next;
+      } 
+   }  // end of single region
+} // end of parallel region

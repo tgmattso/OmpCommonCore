@@ -1,0 +1,19 @@
+step = 1.0 / (double) num_steps;
+#pragma omp parallel
+{
+   int i;
+   int id = omp_get_thread_num();
+   int numthreads = omp_get_num_threads();
+   double x;
+     
+   if (id == 0) actual_nthreads = numthreads;
+        
+   int istart = id    * num_steps/numthreads;
+   int iend  = (id+1) * num_steps/numthreads;        
+   if (id == (numthreads-1)) iend = num_steps;
+	  
+   for (i = istart; i < iend; i++) {
+      x = (i + 0.5) * step;
+      sum[id] += 4.0 / (1.0 + x * x);
+   }
+}  // end of parallel region

@@ -1,0 +1,56 @@
+#
+#  The list of Fortran source files that match the C code from 
+#  the figures in the OpenMP Common Core book
+#
+#
+SOURCES = \
+    Fig_1.1_helloworld.f90  \
+    Fig_1.5_PosixHello.f90  \
+    Fig_10.1_parClaws.f90  \
+    Fig_10.3_runtimeEx.f90  \
+    Fig_10.4_loopCollapse.f90  \
+    Fig_10.6_taskDep.f90  \
+    Fig_10.7_threadpriv.f90  \
+    Fig_11.1_seqPts.f90  \
+    Fig_11.6_hist.f90  \
+    Fig_12.13_serialPi.f90  \
+    Fig_12.14_unrolledPi.f90  \
+    Fig_12.17_ompVecPi.f90  \
+    Fig_12.18_ompParVecPi.f90  \
+    Fig_12.19_ompVecMult.f90  \
+    Fig_12.20_ompVecMultMap.f90  \
+    Fig_12.21_ompTwoTarg.f90  \
+    Fig_12.22_ompTagDat.f90  \
+    Fig_12.9_nestedOpenMP.f90  \
+    Fig_13.1_taskbug.f90  \
+    Fig_4.10_crit.f90  \
+    Fig_4.11_piparCcrit.f90  \
+    Fig_4.2_parReg.f90  \
+    Fig_4.3_parReg1.f90  \
+    Fig_4.5_poprogseq.f90  \
+    Fig_4.6_piparCSPMD1.f90  \
+    Fig_4.7_blockDist_full.f90  \
+    Fig_4.9_piparCpadSum.f90  \
+    Fig_5.6_staticSchedule.f90  \
+    Fig_5.7_dynamicSchedule.f90  \
+    Fig_5.9_piloop.f90  \
+    Fig_6.10_6.11_mandelbrotSolution.f90  \
+    Fig_6.12_piLoopCombined.f90  \
+    Fig_6.3_sharedEx.f90  \
+    Fig_6.4_wrongPrivate.f90  \
+    Fig_6.8_6.9_mandelbrotWrong.f90  \
+    Fig_7.10_fibonacci.f90  \
+    Fig_7.11_fibonacciTasks.f90  \
+    Fig_7.13_piSerial.f90  \
+    Fig_7.14_serialPiDivCon.f90  \
+    Fig_7.15_parPiDivCon.f90  \
+    Fig_7.2_linkedListNoTasks.f90  \
+    Fig_7.4_schroProg.f90  \
+    Fig_7.4_schroProg_full.f90  \
+    Fig_8.2_race.f90  \
+    Fig_8.3_RegPromote.f90  
+#    Fig_6.8_mandelbrotWrongPart1.f90  \
+#    Fig_6.8_mandelbrotWrongPart2.f90  \
+#    Fig_6.9_mandelbrotWrongPart2.f90  \
+#    Fig_6.10_mandelbrotSolutionPart1.f90  \
+#    Fig_6.11_mandelbrotSolutionPart2.f90  \

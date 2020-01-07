@@ -1,0 +1,12 @@
+#pragma omp parallel
+{ 
+   #pragma omp single
+   { 
+      #pragma omp task
+         fred(); 
+      #pragma omp task
+         daisy(); 
+      #pragma omp task
+         billy(); 
+   }  //end of single region
+} //end of parallel region

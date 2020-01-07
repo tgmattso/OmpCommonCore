@@ -1,0 +1,14 @@
+integer :: id, nthrds, i
+!$omp parallel shared(A, B, sum) private(id, nthrds)
+   id = omp_get_thread_num()
+   nthrds = omp_get_num_threads()
+
+   !$omp do reduction(+:sum) 
+      do i = 1, N
+         sum = sum + big_job(A,N)
+      end do 
+   !$omp end do nowait
+
+   bigger_job(B, id)     ! a function that does not use A
+   another_job(sum, id)  ! sum may not be available
+!$omp end parallel

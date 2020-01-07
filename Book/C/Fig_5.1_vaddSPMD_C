@@ -1,0 +1,13 @@
+// OpenMP parallel region and SPMD pattern
+#pragma omp parallel
+{
+   int id, i, Nthrds, istart, iend;
+   id = omp_get_thread_num();
+   Nthrds = omp_get_num_threads(); 
+   istart = id * N / Nthrds;
+   iend = (id + 1) * N / Nthrds;
+   if (id == Nthrds - 1) iend = N; 
+   for (i = istart; i < iend; i++) {
+      a[i] = a[i] + b[i];
+   }
+}

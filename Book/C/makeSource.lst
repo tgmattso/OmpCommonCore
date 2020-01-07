@@ -1,0 +1,63 @@
+#
+#  The list of C source files from the figures in the OpenMP Common Core book
+#
+#  Note:  I had to add headers and the main() statement to Fig_11.7_prodCons4.c  
+#  in order to produce a file that would compile
+#
+SOURCES = \
+    Fig_1.1_helloworld.c  \
+    Fig_1.5_PosixHello.c  \
+    Fig_10.1_parClaws.c  \
+    Fig_10.3_runtimeEx.c  \
+    Fig_10.4_loopCollapse.c  \
+    Fig_10.6_taskDep.c  \
+    Fig_10.7_threadpriv.c  \
+    Fig_11.1_seqPts.c  \
+    Fig_11.6_hist.c  \
+    Fig_11.7_prodCons4.c  \
+    Fig_12.13_serialPi.c  \
+    Fig_12.14_unrolledPi.c  \
+    Fig_12.15_explicitVecPi.c  \
+    Fig_12.16_parVecPi.c  \
+    Fig_12.17_ompVecPi.c  \
+    Fig_12.18_ompParVecPi.c  \
+    Fig_12.19_ompVecMult.c  \
+    Fig_12.20_ompVecMultMap.c  \
+    Fig_12.21_ompTwoTarg.c  \
+    Fig_12.22_ompTargDat.c  \
+    Fig_12.9_nestedOpenMP.c  \
+    Fig_13.1_taskBug.c  \
+    Fig_4.10_crit.c  \
+    Fig_4.11_piparCcrit.c  \
+    Fig_4.2_parReg.c  \
+    Fig_4.3_parReg1.c  \
+    Fig_4.5_poprogseq.c  \
+    Fig_4.6_piparCSPMD1.c  \
+    Fig_4.7_blockDist_full.c  \
+    Fig_4.9_piparCpadSum.c  \
+    Fig_5.6_staticSchedule.c  \
+    Fig_5.7_dynamicSchedule.c  \
+    Fig_5.9_piloop.c  \
+    Fig_6.10_6.11_mandelbrotSolution.c  \
+    Fig_6.12_piLoopCombined.c  \
+    Fig_6.3_sharedEx.c  \
+    Fig_6.4_wrongPrivate.c  \
+    Fig_6.8_6.9_mandelbrotWrong.c  \
+    Fig_7.10_fibonacci.c  \
+    Fig_7.11_fibonacciTasks.c  \
+    Fig_7.13_piSerial.c  \
+    Fig_7.14_serialPiDivCon.c  \
+    Fig_7.15_parPiDivCon.c  \
+    Fig_7.2_linkedListNoTasks.c  \
+    Fig_7.4_schroProg.c  \
+    Fig_7.4_schroProg_full.c  \
+    Fig_8.2_race.c  \
+    Fig_8.3_RegPromote.c
+#
+#  These are the program fragments combined above into units that 
+#  will actually compile
+#
+#    Fig_6.10_mandelbrotSolutionPart1.c  \
+#    Fig_6.11_mandelbrotSolutionPart2.c  \
+#    Fig_6.8_mandelbrotWrongPart1.c  \
+#    Fig_6.9_mandelbrotWrongPart2.c  \

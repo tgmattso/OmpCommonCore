@@ -1,0 +1,7 @@
+incr = 0;
+#pragma omp parallel for firstprivate(incr) 
+for (i = 0; i <= MAX; i++) 
+{
+   if ( (i % 2) == 0) incr++;
+   A[i] = incr;  
+}

@@ -1,0 +1,7 @@
+#pragma omp parallel
+{
+   #pragma omp for
+      for (i = N; i >= 0; i = i - 2) {
+         NEAT_STUFF(i); 
+      }
+}

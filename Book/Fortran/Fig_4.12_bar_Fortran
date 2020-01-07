@@ -1,0 +1,15 @@
+real*8 :: Arr(8), Brr(8)
+integer :: numthrds
+integer :: id, nthrds
+
+call omp_set_num_threads(8)
+!$omp parallel private (id, nthrds)
+   id = omp_get_thread_num() + 1
+   nthrds = omp_get_num_threads()
+   if (id == 1) numthrds = nthrds  
+   Arr(id) = lots_of_work(id, nthrds)
+#pragma omp barrier
+   Brr(id) = needs_all_of_Arr(id, nthrds, Arr)
+!$omp end parallel
+
+

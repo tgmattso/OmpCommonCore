@@ -1,0 +1,23 @@
+! Step 1.a Initialization by initial thread only 
+   do j = 1, VectorSize
+      a(j) = 1.0
+      b(j) = 2.0
+      c(j) = 0.0
+   enddo
+
+! Step 1.b Initialization by all threads (first touch)
+   call omp_set_dynamic(0)
+  !$omp parallel do schedule(static)
+   do j = 1, VectorSize
+      a(j) = 1.0
+      b(j) = 2.0
+      c(j) = 0.0
+   enddo
+  !$omp end parallel do
+
+! Step 2 Compute
+  !$omp parallel do schedule(static)
+    do j = 1, VectorSize
+       a(j) = b(j) + d * c(j)
+    enddo
+  !$omp end parallel do

@@ -1,0 +1,7 @@
+define an array section in terms of the lower-bound, the length of the section, and the stride.
+   [lower-bound:length:stride]
+   [lower-bound:length]        // stride implied as one
+   [:length:stride ]           // lower-bound implied as zero
+Using an array section in the previous example, we can have each thread allocate and copy an original variable that is an array into a parallel region with the directive:
+   #pragma omp parallel firstprivate(vptr[0:1000:1])
+Array sections also work for the other clauses that create private copies of variables such as private and reduction.

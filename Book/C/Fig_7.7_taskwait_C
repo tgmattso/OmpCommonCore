@@ -1,0 +1,13 @@
+#pragma omp parallel
+{ 
+   #pragma omp single 
+   { 
+      #pragma omp task
+         fred(); 
+      #pragma omp task
+         daisy(); 
+      #pragma omp taskwait
+      #pragma omp task
+         billy(); 
+   } 
+}

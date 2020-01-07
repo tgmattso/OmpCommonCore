@@ -1,0 +1,9 @@
+These files define macros to be used inside our Makefile.  Pick
+one that comes close to your system/compiler/platform.  Make any 
+changes needed to precisely match the compilers you are using. 
+Copy the resulting file to one named 
+
+    make.def
+
+
+
