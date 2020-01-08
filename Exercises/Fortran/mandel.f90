@@ -9,6 +9,7 @@
 !C  HISTORY: Written:  (Mark Bull, August 2011).
 !C           Changed "comples" to "d_comples" to avoid collsion with 
 !C           math.h complex type (Tim Mattson, September 2011)
+!C           Adapted to Fortran code by Helen He, 09/2017
 
 
        MODULE  mandel_module
