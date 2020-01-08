@@ -2,7 +2,7 @@
 # copy to make.def
 
 FC          = ftn
-CC          = icc
+CC          = cc
 CLINKER     = $(FC)
 FLINKER     = $(FC)
 OPTFLAGS    = -qopenmp 
@@ -11,9 +11,6 @@ PRE         = ./
 
 CFLAGS	  = $(OPTFLAGS)
 FFLAGS	  = $(OPTFLAGS)
-
-CC          = cc
-CFLAGS	  = $(OPTFLAGS)
 
 OBJ=o
 EXE=
