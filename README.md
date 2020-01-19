@@ -1,5 +1,5 @@
 
-This content supports readers of our book:
+This repository supports readers of our book:
 
      The OpenMP Common Core: making OpenMP Simple Again
 
