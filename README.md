@@ -3,7 +3,10 @@ This content supports readers of our book:
 
      The OpenMP Common Core: making OpenMP Simple Again
 
-as they learn OpenMP.  Specific contents include:
+We encourage readers to explore the material actively; mixing
+time spent reading with time spent coding.   To that end, we
+provide lots of code for our readers to explore organized into
+the following directories.
 
       Book: Code used in the book.  This includes any
       code that appears in the figures as well as code
@@ -14,7 +17,7 @@ as they learn OpenMP.  Specific contents include:
       support advanced studies in OpenMP.  In each case
       we include serial code you can start with and a
       directory of solutions.  Currently, these are
-      only provided for C.
+      only provided in C.
 
       Exercises: code and solutions for the running 
       examples used in the book.  We recommend pausing 
