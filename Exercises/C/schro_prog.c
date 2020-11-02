@@ -22,9 +22,9 @@
 // seed the pseudo random sequence with time of day
 void seedIt(long *val)
 {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    *val = (long)tv.tv_usec;
+   struct timeval tv;
+   gettimeofday(&tv, NULL);
+   *val = (long)tv.tv_usec;
 }
 
 // Linear congruential random number generator
@@ -38,11 +38,11 @@ long nextRan(long last)
 // flip a coin ... heads (true) or tails (false)
 bool flip(long *coin)
 {
-  *coin = nextRan(*coin);
-  if (*coin > MOD/2) 
-     return true;
-  else
-     return false;
+   *coin = nextRan(*coin);
+   if (*coin > MOD/2) 
+      return true;
+   else
+      return false;
 }
 
 // wait a short random amount of time
@@ -54,9 +54,9 @@ double waitAbit()
    count = nextRan(rand);
   
    // do some math to make us wait a while
-   for (i = 0;     i<count; i++){
+   for (i = 0; i < count; i++){
       rand = nextRan(rand);
-      val += (double)rand/((double)MULT);
+      val += (double)rand / ((double)MULT);
    }
    
    return val;
@@ -68,52 +68,52 @@ int main()
    long rand,i, dcount= 0, lcount=0; 
    int dead_or_alive;
 
-   for(i=0; i<NTRIALS; i++){
+   for(i = 0; i < NTRIALS; i++) {
    #pragma omp parallel num_threads(2) shared(dead_or_alive)
    {
-       if(omp_get_thread_num() == 0)
-       {
-         printf(" with %d threads\n",omp_get_num_threads());
+      if (omp_get_thread_num() == 0)
+      {
+         printf(" with %d threads\n", omp_get_num_threads());
          printf("Schrodingers program says the cat is ");
-       }
+      }
        
-       #pragma omp single
-       {
-          // "flip a coin" to choose which task is for the dead
-          // cat and which for the living cat.
-          long coin;
-          seedIt(&coin);
-          bool HorT = flip(&coin);
+      #pragma omp single
+      {
+         // "flip a coin" to choose which task is for the dead
+         // cat and which for the living cat.
+         long coin;
+         seedIt(&coin);
+         bool HorT = flip(&coin);
 
-          // without the atomics, these tasks are participating in a 
-          // data race, but the program logic works fine if the actual 
-          // value is messed up since in C any int other than 1 is false
-          #pragma omp task
-          {
-              double val = waitAbit();
-              // a store of a single machine word (bool)
-//              #pragma omp atomic write
-              dead_or_alive = HorT;
-          }
-          #pragma omp task
-          {
-              double val = waitAbit();
-              // a store of a single machine word (bool)
-//              #pragma omp atomic write
-              dead_or_alive = !HorT;
-          }
-       }
+         // without the atomics, these tasks are participating in a 
+         // data race, but the program logic works fine if the actual 
+         // value is messed up since in C any int other than 1 is false
+         #pragma omp task
+         {
+            double val = waitAbit();
+            // a store of a single machine word (bool)
+//             #pragma omp atomic write
+            dead_or_alive = HorT;
+         }
+         #pragma omp task
+         {
+            double val = waitAbit();
+            // a store of a single machine word (bool)
+//             #pragma omp atomic write
+            dead_or_alive = !HorT;
+         }
+      }
    }
-   if(dead_or_alive){
-       printf(" alive. %d\n",(int)dead_or_alive);
-       lcount++;
+   if (dead_or_alive) {
+      printf(" alive. %d\n", (int)dead_or_alive);
+      lcount++;
    }
    else {
-       printf(" dead. %d\n",(int)dead_or_alive);
-       dcount++;
+      printf(" dead. %d\n", (int)dead_or_alive);
+      dcount++;
    }
    } // end loop over trials (for testing only)
 
-   printf("dead %d times and alive %d times \n",dcount, lcount);
+   printf("dead %d times and alive %d times \n", dcount, lcount);
    return 0;
 }

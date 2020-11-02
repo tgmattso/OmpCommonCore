@@ -17,7 +17,6 @@
 
 int main()
 {
-
    printf("I think");
 
    #pragma omp parallel
@@ -33,5 +32,4 @@ int main()
    }
    printf("s");
    printf(" are fun!\n");
- 
 }

@@ -15,7 +15,6 @@ int main ()
    }  
 
    printf("all done, with hopefully %d threads\n",nthreads);
-
 }
 
  
