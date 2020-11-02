@@ -33,11 +33,11 @@ stream$(EXE):  stream.$(OBJ)
 stream_nft$(EXE):  stream_nft.$(OBJ) 
 	$(CLINKER) $(OPTFLAGS) -o stream_nft stream_nft.$(OBJ) $(LIBS)
 
-xthi_omp$(EXE):  xthi_omp.$(OBJ) 
-	$(CLINKER) $(OPTFLAGS) -o xthi_omp xthi_omp.$(OBJ) $(LIBS)
+#xthi_omp$(EXE):  xthi_omp.$(OBJ) 
+#	$(CLINKER) $(OPTFLAGS) -o xthi_omp xthi_omp.$(OBJ) $(LIBS)
 
-xthi_nested_omp$(EXE):  xthi_nested_omp.$(OBJ) 
-	$(CLINKER) $(OPTFLAGS) -o xthi_nested_omp xthi_nested_omp.$(OBJ) $(LIBS)
+#xthi_nested_omp$(EXE):  xthi_nested_omp.$(OBJ) 
+#	$(CLINKER) $(OPTFLAGS) -o xthi_nested_omp xthi_nested_omp.$(OBJ) $(LIBS)
 
 test: $(EXES)
 	$(PRE)hello$(EXE) 
