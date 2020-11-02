@@ -2,10 +2,10 @@
 #
 # Note: gcc on Apple systems defaults to the Xcode Clang compiler.
 # This compiler doesn't know OpenMP.  You must download a real
-# gun compiler which in my case is gcc-9
+# gun compiler which in my case is gcc-10
 #
-FC          = gfortran-9
-CC          = gcc-9
+FC          = gfortran-10
+CC          = gcc-10
 FLINKER     = $(FC)
 CLINKER     = $(CC)
 OPTFLAGS    = -fopenmp -DAPPLE -O3
