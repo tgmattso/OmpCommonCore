@@ -35,26 +35,26 @@ static double REAL_PI = 3.1415926535897932;
 double step;
 int main ()
 {
-	  int i;
-          long num_steps;
-          double error;
-	  double x, pi, sum = 0.0;
-	  double start_time, run_time;
-          omp_set_num_threads(4);
+   int i;
+   long num_steps;
+   double error;
+   double x, pi, sum = 0.0;
+   double start_time, run_time;
+   omp_set_num_threads(4);
 
-          for (num_steps =1; num_steps <NSTEPS; num_steps*=10){
-	     step = 1.0/(double) num_steps;
+   for (num_steps = 1; num_steps  <NSTEPS; num_steps *= 10) {
+      step = 1.0 / (double) num_steps;
 
-             sum = 0.0;
+      sum = 0.0;
 #pragma omp parallel for reduction(+:sum)
-	     for (i=1;i<= num_steps; i++){
-		  x = (i-0.5)*step;
-		  sum = sum + 4.0/(1.0+x*x);
-	     }
-	     pi = step * sum;
-             error = ABS(pi-REAL_PI);
-	     printf(" %f %f %e \n",(float)num_steps,pi,error);
-          }
+      for (i = 1; i <= num_steps; i++) {
+         x = (i - 0.5) * step;
+         sum = sum + 4.0 / (1.0 + x*x);
+      }
+      pi = step * sum;
+      error = ABS(pi - REAL_PI);
+      printf(" %f %f %e \n",(float)num_steps, pi, error);
+   }
 }	  
 
 

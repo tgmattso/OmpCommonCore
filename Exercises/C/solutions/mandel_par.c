@@ -14,7 +14,10 @@
 **
 **           Changed "comples" to "d_comples" to avoid collsion with 
 **           math.h complex type.   Fixed data environment errors
-**          (Tim Mattson, September 2011)
+**           (Tim Mattson, September 2011)
+**
+**           Changed "atomic" to "critial" to match Common Core
+**           (Helen He, November 2020)
 */
 
 #include <stdio.h>
