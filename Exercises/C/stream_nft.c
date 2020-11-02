@@ -161,7 +161,7 @@
  *
  * Thanks!
  * 
- *  Note: Helen He commented out the first touch in the original source code for this exercise.
+ *  Note: Helen He commented out the first touch in the original stream.c source code for this exercise.
  *
  *-----------------------------------------------------------------------*/
 
