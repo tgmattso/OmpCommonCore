@@ -4,11 +4,11 @@
 ! is great since it gives us an easy way to check the answer.
 
 ! This version of the program uses a divide and concquer algorithm
-! and recurrsion.
+! with tasks and taskwait.
 
-! History: C code written by Tim Mattson, 10/2013.
-!          Adapted to Fortran code by Helen He, 09/2017. 
-!          Updated to Fortran90 code by Helen He, 11/2020. 
+! History: C Code written by Tim Mattson, 10/2013
+!          Adapted to Fortran code by Helen He, 09/2017 
+!          Updated to Fortran90 code by Helen He, 11/2020
 
 
 module data_mod
@@ -17,6 +17,7 @@ module data_mod
 
    contains
       real*8 recursive function pi_comp(Nstart, Nfinish, step) result(sum)
+         use omp_lib
          implicit none
  
          integer, intent(in) :: Nstart, Nfinish
@@ -32,8 +33,13 @@ module data_mod
             enddo
          else
             iblk = Nfinish - Nstart
-            sum1 = pi_comp(Nstart, Nfinish - iblk/2, step)
-            sum2 = pi_comp(Nfinish - iblk/2, Nfinish, step)
+            !$omp task shared(sum1)
+               sum1 = pi_comp(Nstart, Nfinish - iblk/2, step)
+            !$omp end task 
+            !$omp task shared(sum2)
+               sum2 = pi_comp(Nfinish - iblk/2, Nfinish, step)
+            !$omp end task 
+            !$omp taskwait
             sum = sum1 + sum2
          endif
 
@@ -46,18 +52,29 @@ program main
    use data_mod
    implicit none
 
-   integer :: i
+   integer :: i, j
    real*8 :: pi, sum, step
+   integer, parameter :: MAX = 4
    real*8 :: init_time, final_time
 
-   init_time = OMP_GET_WTIME()
-
    step = 1.0 / num_steps
-   sum = pi_comp(0, num_steps, step)
-   pi = step * sum
 
-   final_time = OMP_GET_WTIME() - init_time
-   write(*,100) num_steps, pi, final_time 
-100    FORMAT(' With ', i14,' steps, pi = ', f15.8,' in ', f8.3,' secs') 
+   do j = 1, MAX
+      CALL omp_set_num_threads(j)
+      init_time = OMP_GET_WTIME()
 
+      !$omp parallel
+         !$omp single 
+            print *, "num threads=",omp_get_num_threads()
+            sum = pi_comp(0, num_steps, step)
+         !$omp end single
+      !$omp end parallel
+
+      pi = step * sum
+
+      final_time = OMP_GET_WTIME() - init_time
+      write(*,100) num_steps, pi, final_time 
+100   format(' for ',i14,' steps, pi = ',f15.8,' in ',f8.3,' secs') 
+
+   enddo
 end program main 

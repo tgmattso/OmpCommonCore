@@ -1,13 +1,13 @@
-C This program will numerically compute the integral of
-C                   4/(1+x*x) 
-C from 0 to 1.  The value of this integral is pi -- which 
-C is great since it gives us an easy way to check the answer.
+! This program will numerically compute the integral of
+!                   4/(1+x*x) 
+! from 0 to 1.  The value of this integral is pi -- which 
+! is great since it gives us an easy way to check the answer.
 
-C The is the original sequential program.  It uses the timer
-C from the OpenMP runtime library
+! The is the original sequential program.  It uses the timer
+! from the OpenMP runtime library
 
-C History: C code written by Tim Mattson, 11/1999.
-C adapted to Fortran code by Helen He, 09/2017. 
+! History: C code written by Tim Mattson, 11/1999.
+! adapted to Fortran code by Helen He, 09/2017. 
 
  
           PROGRAM MAIN
@@ -21,7 +21,7 @@ C adapted to Fortran code by Helen He, 09/2017.
 
           sum = 0.0
 
-          step = 1.0/num_steps
+          step = 1.0 / num_steps
           start_time = OMP_GET_WTIME()
 
           DO i = 1, num_steps

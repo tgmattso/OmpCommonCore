@@ -9,10 +9,9 @@
 
 !$OMP PARALLEL private(id)
         id = OMP_GET_THREAD_NUM()
-        PRINT *, "Hello World from thread = ", id,
+        PRINT *, "Hello World from thread = ", id, &
      &         " with ", OMP_GET_NUM_THREADS(), " threads"
 !$OMP END PARALLEL
         PRINT *, "all done, with hopefully ",nthreads," threads"
 
-        STOP    
-        END
+        END PROGRAM MAIN
