@@ -1,6 +1,6 @@
-        PROGRAM MAIN
-        IMPLICIT NONE
+PROGRAM MAIN
+IMPLICIT NONE
 
-        WRITE(*,*) "Hello World"
+WRITE(*,*) "Hello World"
 
-        END PROGRAM MAIN
+END PROGRAM MAIN

@@ -24,39 +24,39 @@
 !          Adapted to Fortran code by Helen He, 09/2017. 
 !          Changed to Fortran90 code by Helen He, 11/2020. 
 
-        PROGRAM MAIN
-        USE OMP_LIB
-        IMPLICIT NONE
+  PROGRAM MAIN
+  USE OMP_LIB
+  IMPLICIT NONE
 
-        INTEGER :: i
-        INTEGER*8 :: num_steps
-        REAL*8 :: error  
-        INTEGER, PARAMETER :: NSTEPS=100000000
-        REAL*8, PARAMETER :: REAL_PI = 3.1415926535897932
-        REAL*8 :: x, pi, sum, step
-        REAL*8 :: start_time, run_time
+  INTEGER :: i
+  INTEGER*8 :: num_steps
+  REAL*8 :: error  
+  INTEGER, PARAMETER :: NSTEPS=100000000
+  REAL*8, PARAMETER :: REAL_PI = 3.1415926535897932
+  REAL*8 :: x, pi, sum, step
+  REAL*8 :: start_time, run_time
 
-        CALL OMP_SET_NUM_THREADS(4)
+  CALL OMP_SET_NUM_THREADS(4)
 
-        num_steps = 1
-        DO WHILE  (num_steps < NSTEPS) 
-           step = 1.0 / num_steps
+  num_steps = 1
+  DO WHILE  (num_steps < NSTEPS) 
+     step = 1.0 / num_steps
 
-           sum = 0.0
+     sum = 0.0
 !$OMP PARALLEL DO REDUCTION(+:sum) PRIVATE(x)
-           DO i = 1, num_steps
-              x = (i - 0.5) * step
-              sum = sum + 4.0 / (1.0 + x*x)
-           ENDDO
+     DO i = 1, num_steps
+        x = (i - 0.5) * step
+        sum = sum + 4.0 / (1.0 + x*x)
+     ENDDO
 !$OMP END PARALLEL DO
 
-           pi = step * sum
-           error = ABS(pi - REAL_PI)
+     pi = step * sum
+     error = ABS(pi - REAL_PI)
              
-           WRITE(*,100) 1.0*num_steps, pi, error
-100        FORMAT(f20.6, f15.8, e15.7)
+     WRITE(*,100) 1.0*num_steps, pi, error
+100  FORMAT(f20.6, f15.8, e15.7)
 
-          num_steps = 10 * num_steps
-          ENDDO
+    num_steps = 10 * num_steps
+    ENDDO
 
-          END PROGRAM MAIN
+    END PROGRAM MAIN

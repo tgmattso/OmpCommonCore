@@ -24,40 +24,40 @@
 !          Adapted to Fortran code by Helen He, 09/2017 
 !          Changed to Fortran90 code by Helen He, 11/2020 
 
-          PROGRAM MAIN
-          USE OMP_LIB
-          IMPLICIT NONE
+  PROGRAM MAIN
+  USE OMP_LIB
+  IMPLICIT NONE
 
-          INTEGER :: i, id, nthreads
-          INTEGER, PARAMETER :: num_steps = 100000000
-          REAL*8 :: x, pi, sum, step
-          REAL*8 :: start_time, run_time
+  INTEGER :: i, id, nthreads
+  INTEGER, PARAMETER :: num_steps = 100000000
+  REAL*8 :: x, pi, sum, step
+  REAL*8 :: start_time, run_time
 
-          DO id = 1, 4
-             sum = 0.0
+  DO id = 1, 4
+     sum = 0.0
 
-             step = 1.0 / num_steps
+     step = 1.0 / num_steps
 
-             CALL OMP_SET_NUM_THREADS(id)
-             start_time = OMP_GET_WTIME()
+     CALL OMP_SET_NUM_THREADS(id)
+     start_time = OMP_GET_WTIME()
 
 !$OMP PARALLEL PRIVATE(i,x) 
 !$OMP SINGLE
-          nthreads = OMP_GET_NUM_THREADS()
+     nthreads = OMP_GET_NUM_THREADS()
 !$OMP END SINGLE NOWAIT
 !$OMP DO REDUCTION(+:sum)
-             DO i = 1, num_steps
-                x = (i - 0.5) * step
-                sum = sum + 4.0 / (1.0 + x * x)
-             ENDDO
+     DO i = 1, num_steps
+        x = (i - 0.5) * step
+        sum = sum + 4.0 / (1.0 + x * x)
+     ENDDO
 !$OMP END DO
 !$OMP END PARALLEL  
 
-             pi = step * sum
-             run_time = OMP_GET_WTIME() - start_time
-             WRITE(*,100) pi, run_time, nthreads
-100          FORMAT('pi is ',f15.8,' in ',f8.3,'secs and ',i3,' threads')
+     pi = step * sum
+     run_time = OMP_GET_WTIME() - start_time
+     WRITE(*,100) pi, run_time, nthreads
+100  FORMAT('pi is ',f15.8,' in ',f8.3,'secs and ',i3,' threads')
 
-          ENDDO
+  ENDDO
 
-          END PROGRAM MAIN
+  END PROGRAM MAIN

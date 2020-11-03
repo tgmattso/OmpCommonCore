@@ -12,84 +12,84 @@
 !           Adapted to Fortran90 code (Helen He, September 2017)
 
 
-       MODULE  mandel_module
-       implicit none
+  MODULE  mandel_module
+  implicit none
 
-       INTEGER, PARAMETER :: DP = SELECTED_REAL_KIND(14)
+  INTEGER, PARAMETER :: DP = SELECTED_REAL_KIND(14)
 
-          REAL(KIND = DP) :: r
+  REAL(KIND = DP) :: r
 
-       INTEGER, PARAMETER :: NPOINTS=1000
-       INTEGER, PARAMETER :: MAXITER=1000
-       INTEGER :: numoutside=0
+  INTEGER, PARAMETER :: NPOINTS=1000
+  INTEGER, PARAMETER :: MAXITER=1000
+  INTEGER :: numoutside=0
 
-       TYPE d_complex
-          REAL(KIND = DP) :: r
-          REAL(KIND = DP) :: i
-       END TYPE d_complex
+  TYPE d_complex
+     REAL(KIND = DP) :: r
+     REAL(KIND = DP) :: i
+  END TYPE d_complex
 
-       TYPE(d_complex) :: c
+  TYPE(d_complex) :: c
 
-       contains 
+  contains 
 
-          SUBROUTINE testpoint()
+     SUBROUTINE testpoint()
 
 ! Does the iteration z=z*z+c, until |z| > 2 when point is known to be outside set
 ! If loop count reaches MAXITER, point is considered to be inside the set
 
-          TYPE(d_complex) :: z
-          INTEGER :: iter
-          REAL(KIND = DP) :: temp
+     TYPE(d_complex) :: z
+     INTEGER :: iter
+     REAL(KIND = DP) :: temp
 
-          z = c
+     z = c
 
-          DO iter = 1, MAXITER
-             temp = (z%r*z%r)-(z%i*z%i)+c%r
-             z%i = z%r*z%i*2+c%i
-             z%r = temp
+     DO iter = 1, MAXITER
+        temp = (z%r*z%r)-(z%i*z%i)+c%r
+        z%i = z%r*z%i*2+c%i
+        z%r = temp
 
-             IF ((z%r*z%r+z%i*z%i)>4.0) THEN 
-                numoutside = numoutside + 1
-                EXIT
-             ENDIF
-          ENDDO
+        IF ((z%r*z%r+z%i*z%i)>4.0) THEN 
+           numoutside = numoutside + 1
+           EXIT
+        ENDIF
+     ENDDO
 
-          END SUBROUTINE
+     END SUBROUTINE
 
-       END MODULE mandel_module
+  END MODULE mandel_module
 
-       PROGRAM MAIN
-       USE OMP_LIB
-       USE mandel_module
-       IMPLICIT NONE
+  PROGRAM MAIN
+  USE OMP_LIB
+  USE mandel_module
+  IMPLICIT NONE
 
-       INTEGER :: i, j
-       REAL(KIND = DP) :: area, error
-       REAL(KIND = DP) :: eps = 1.0e-5
+  INTEGER :: i, j
+  REAL(KIND = DP) :: area, error
+  REAL(KIND = DP) :: eps = 1.0e-5
 
-!   Loop over grid of points in the complex plane which contains the Mandelbrot set,
-!   testing each point to see whether it is inside or outside the set.
+! Loop over grid of points in the complex plane which contains the Mandelbrot set,
+! testing each point to see whether it is inside or outside the set.
 
 !$OMP PARALLEL DO DEFAULT(shared) PRIVATE(eps)
 
-       DO i = 1, NPOINTS
-       DO j = 1, NPOINTS
-          c%r = -2.0+2.5*DBLE(i-1)/DBLE(NPOINTS)+eps
-          c%i = 1.125*DBLE(j-1)/DBLE(NPOINTS)+eps
-          CALL testpoint()
-       ENDDO
-       ENDDO
+  DO i = 1, NPOINTS
+  DO j = 1, NPOINTS
+     c%r = -2.0+2.5*DBLE(i-1)/DBLE(NPOINTS)+eps
+     c%i = 1.125*DBLE(j-1)/DBLE(NPOINTS)+eps
+     CALL testpoint()
+  ENDDO
+  ENDDO
 !$OMP END PARALLEL DO
 
 ! Calculate area of set and error estimate and output the results
    
-       area = 2.0*2.5*1.125*DBLE(NPOINTS*NPOINTS-numoutside)   &
+  area = 2.0*2.5*1.125*DBLE(NPOINTS*NPOINTS-numoutside)   &
      &        /DBLE(NPOINTS*NPOINTS)
-       error = area/DBLE(NPOINTS)
+  error = area/DBLE(NPOINTS)
 
-       write(*,*)"numoutside=", numoutside
-       WRITE(*,100) area, error
+  write(*,*)"numoutside=", numoutside
+  WRITE(*,100) area, error
 100    FORMAT("Area of Mandlebrot set = ", f12.8, "  +/-", f12.8)
-       WRITE(*,*)"Correct answer should be around 1.510659"
+  WRITE(*,*)"Correct answer should be around 1.510659"
 
-       END PROGRAM MAIN
+  END PROGRAM MAIN
