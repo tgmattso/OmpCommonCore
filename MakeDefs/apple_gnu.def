@@ -8,7 +8,8 @@ FC          = gfortran-10
 CC          = gcc-10
 FLINKER     = $(FC)
 CLINKER     = $(CC)
-OPTFLAGS    = -fopenmp -DAPPLE
+OPTFLAGS    = -fopenmp -DAPPLE -O0
+
 LIBS        = -lm
 PRE         = ./
 

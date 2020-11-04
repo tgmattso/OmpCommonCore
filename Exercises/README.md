@@ -43,6 +43,11 @@ procedure.  First go to the start menu, and select
 cd to the appropriate folder.  Copy the approprate make.def and 
 then use nmake to build.
 
+Notice we have set the optmization flag to -O0 explicitly. This is 
+to prevent compiler optimizations from hiding certain OpenMP features (such 
+as false sharing) that we would like to expose.  You can set to a higher
+optimization level such as -O3 to improve performance.
+
 Finally, we have a second option for Fortran programmers.  In our 
 opinion, a Fortran programmer should be comfortable with the basics
 of C.  Hence, we provide a file called "learningC.c".  This file 

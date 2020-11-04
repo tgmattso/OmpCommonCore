@@ -2,7 +2,7 @@
 # Note: untested
 FC         = ifort
 CC         = icpc
-OPTFLAGS   = -fopenmp
+OPTFLAGS   = -fopenmp -O0
 
 FLINKER     = $(FC)
 CLINKER     = $(CC)

@@ -4,7 +4,7 @@ FC          = ifort
 CC          = icc
 FLINKER     = $(FC)
 CLINKER     = $(CC)
-OPTFLAGS    = -fopenmp -DAPPLE -O3
+OPTFLAGS    = -fopenmp -DAPPLE -O0
 LIBS        = -lm
 PRE         = ./
 

@@ -5,7 +5,7 @@ FC          = ftn
 CC          = cc
 CLINKER     = $(FC)
 FLINKER     = $(FC)
-OPTFLAGS    = -qopenmp 
+OPTFLAGS    = -qopenmp -O0 
 LIBS        = -lm
 PRE         = ./
 

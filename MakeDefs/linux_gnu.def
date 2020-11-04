@@ -4,7 +4,7 @@ FC          = gfortran
 CC          = g++
 CLINKER     = $(CC)
 FLINKER     = $(FC)
-OPTFLAGS    = -fopenmp 
+OPTFLAGS    = -fopenmp -O0 
 LIBS        = -lm
 PRE         = ./
 

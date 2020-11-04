@@ -5,7 +5,7 @@ FC          = pgf90
 CC          = pgcc
 CLINKER     = $(CC)
 FLINKER     = $(FC)
-OPTFLAGS    = -mp -fast 
+OPTFLAGS    = -mp -O0 
 LIBS        =
 
 FFLAGS	  = $(OPTFLAGS) 
