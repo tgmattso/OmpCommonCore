@@ -44,7 +44,7 @@ cd to the appropriate folder.  Copy the approprate make.def and
 then use nmake to build.
 
 Notice we have set the optmization flag to -O0 explicitly. This is 
-to prevent compiler optimizations from hiding certain OpenMP features (such 
+to prevent compiler optimizations from "fixing" certain OpenMP issues (such 
 as false sharing) that we would like to expose.  You can set to a higher
 optimization level such as -O3 to improve performance.
 
