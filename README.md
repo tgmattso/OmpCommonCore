@@ -31,16 +31,23 @@ the following directories.
       to reference the compilers you wish to use.  Put
       this copy in the MakeDefs director and call it make.def
       
-Join the Slack workspace "OmpCommonCore-SC20"
+   
+Join the Slack workspace "OmpCommonCore-SC20" for the SC20 OpenMP Common Core Tutorial:
 
-	https://tinyurl.com/yyn3dxrl      
+	https://tinyurl.com/yyn3dxrl   
+	
+You can use any system with a working OpenMP compiler for the hands-on exercises
+in the "Exercises" directory.  The templates for "make.def" to be used for different 
+architectuers are available in the "MakeDefs" directrory.
+	
+Training accounts on the NERSC Cori system are provided from Nov 8 to Nov 16:
 
-Get an account on Cori in advance for the SC20 OpenMP Common Core Tutorial
+-- Get an account on Cori
 
 	Apply for a training account (expires Nov 16, 2020) 
 	https://iris.nersc.gov/train use 4-letter code “bq2d”
 
-Obtain the exercises
+-- Obtain the exercises on Cori
 
 	% ssh trainxxx@cori.nersc.gov
 	% cd $SCRATCH
@@ -48,7 +55,7 @@ Obtain the exercises
 	% cd OpenMP_SC20/Exercises/C (or % cd OpenMP_SC20/Exercises/Fortran)
 	% make (for all codes)
 
-Compile on Cori
+-- Compile on Cori
 
 	The default compiler is Intel. Use compiler wrappers (ftn, cc, and CC) 
 	and the OpenMP compiler flag to build an individual code, such as:
@@ -64,7 +71,7 @@ Compile on Cori
 	like to expose.  You can set to a higher optimization level such as 
 	-O3 to improve performance.
 
-Run on Cori
+-- Run on Cori
 
 	Get on a compute node with an interactive batch session first
 	With a node reservation during the SC20 tutorial:
