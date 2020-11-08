@@ -9,9 +9,9 @@
 !           Changed "comples" to "d_comples" to avoid collsion with 
 !           math.h complex type (Tim Mattson, September 2011)
 !           Converted to Fortran90 code (Helen He, September 2017)
-!           Changed from "atomic" to "critical" to match Common Core (Helen He, November 2020)
+!           Implemented a "reduction" version (Helen He, November 2020)
 
-  MODULE  mandel_par_module
+  MODULE  mandel_reduction_module
   implicit none
 
   INTEGER, PARAMETER :: DP = SELECTED_REAL_KIND(14)
@@ -27,7 +27,7 @@
 
   contains 
 
-     SUBROUTINE testpoint(c)
+     INTEGER FUNCTION testpoint(c) result(outside)
 
 ! Does the iteration z=z*z+c, until |z| > 2 when point is known to be outside set
 ! If loop count reaches MAXITER, point is considered to be inside the set
@@ -38,6 +38,7 @@
      REAL(KIND = DP) :: temp
 
      z = c
+     outside = 0
 
      DO iter = 1, MAXITER
         temp = (z%r*z%r) - (z%i*z%i) + c%r
@@ -45,27 +46,26 @@
         z%r = temp
 
         IF ((z%r*z%r + z%i*z%i) > 4.0) THEN 
-           !$OMP CRITICAL
-               numoutside = numoutside + 1
-           !$OMP END CRITICAL
+           outside = outside + 1
            EXIT
         ENDIF
      ENDDO
 
-     END SUBROUTINE
+     END FUNCTION testpoint
 
-  END MODULE mandel_par_module
+  END MODULE mandel_reduction_module
 
 
-  PROGRAM mandel_par
+  PROGRAM mandel_reduction
 
   USE OMP_LIB
-  USE mandel_par_module
+  USE mandel_reduction_module
   IMPLICIT NONE
 
   INTEGER :: i, j
   REAL(KIND = DP) :: area, error
   REAL(KIND = DP) :: eps = 1.0e-5
+  INTEGER :: outside
 
   TYPE(d_complex) :: c
 
@@ -74,13 +74,13 @@
 ! Loop over grid of points in the complex plane which contains the Mandelbrot set,
 ! testing each point to see whether it is inside or outside the set.
 
-!$OMP PARALLEL DO DEFAULT(shared) FIRSTPRIVATE(eps) PRIVATE(c,j) 
+!$OMP PARALLEL DO DEFAULT(shared) FIRSTPRIVATE(eps) PRIVATE(c,j) REDUCTION(+:numoutside) 
 
   DO i = 1, NPOINTS  
   DO j = 1, NPOINTS 
      c%r = -2.0 + 2.5 * DBLE(i-1) / DBLE(NPOINTS) + eps
      c%i = 1.125 * DBLE(j-1) / DBLE(NPOINTS) + eps
-     CALL testpoint(c)
+     numoutside = numoutside + testpoint(c)
   ENDDO
   ENDDO
 !$OMP END PARALLEL DO
@@ -96,4 +96,4 @@
 100    FORMAT("Area of Mandlebrot set = ", f12.8, f12.8)
   WRITE(*,*)"Correct answer should be around 1.510659"
 
-  END PROGRAM mandel_par
+  END PROGRAM mandel_reduction

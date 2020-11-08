@@ -16,7 +16,7 @@
 **           math.h complex type.   Fixed data environment errors
 **           (Tim Mattson, September 2011)
 **
-**           Changed "atomic" to "critical" to match Common Core
+**           Implememted a "reduction" version
 **           (Helen He, November 2020)
 */
 
@@ -33,7 +33,7 @@ struct d_complex {
    double i; 
 };
 
-void testpoint(struct d_complex);
+int testpoint(struct d_complex);
 struct d_complex c; 
 int numoutside = 0;
 
@@ -44,13 +44,13 @@ int main ()
 
 // Loop over grid of points in the complex plane which contains the Mandelbrot set,
 // testing each point to see whether it is inside or outside the set.
-   omp_set_num_threads(4);
-   #pragma omp parallel for private(c,j) firstprivate(eps)
+   omp_set_num_threads(8);
+   #pragma omp parallel for private(c,j) firstprivate(eps) reduction(+:numoutside)
       for (i = 0; i < NPOINTS; i++) { 
          for (j = 0; j < NPOINTS; j++) {
             c.r = -2.0 + 2.5 * (double)(i)/(double)(NPOINTS) + eps; 
             c.i = 1.125 * (double)(j)/(double)(NPOINTS) + eps; 
-            testpoint(c);
+            numoutside += testpoint(c);
          } 
       }
 
@@ -63,13 +63,14 @@ int main ()
    printf("Correct answer should be around 1.510659\n");
 }
 
-void testpoint(struct d_complex c)
+int testpoint(struct d_complex c)
 {
 // Does the iteration z=z*z+c, until |z| > 2 when point is known to be outside set
 // If loop count reaches MAXITER, point is considered to be inside the set
    struct d_complex z;
    int iter;
    double temp;
+   int outside = 0;
 
    z = c;
    for (iter = 0; iter < MXITR; iter++) {
@@ -77,9 +78,9 @@ void testpoint(struct d_complex c)
       z.i = z.r * z.i * 2 + c.i;
       z.r = temp;
       if ((z.r * z.r + z.i * z.i) > 4.0) { 
-         #pragma omp critical
-            numoutside++;
+         outside++;
          break; 
       }
    } 
+   return outside;
 }
