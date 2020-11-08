@@ -31,7 +31,10 @@ the following directories.
       to reference the compilers you wish to use.  Put
       this copy in the MakeDefs director and call it make.def
       
-      
+Join the Slack workspace "OmpCommonCore-SC20"
+
+	https://tinyurl.com/yyn3dxrl      
+
 Get an account on Cori in advance for the SC20 OpenMP Common Core Tutorial
 
 	Apply for a training account (expires Nov 16, 2020) 
