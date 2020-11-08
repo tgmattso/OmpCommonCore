@@ -3,7 +3,7 @@
 
 FC          = ftn
 CC          = cc
-CLINKER     = $(FC)
+CLINKER     = $(CC)
 FLINKER     = $(FC)
 OPTFLAGS    = -qopenmp -O0 
 LIBS        = -lm

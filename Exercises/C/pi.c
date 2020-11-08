@@ -36,5 +36,5 @@ int main()
 
    pi = step * sum;
    run_time = omp_get_wtime() - start_time;
-   printf("pi = %lf, with \%ld steps, in \%lf secs\n ", pi, num_steps, run_time);
+   printf("pi = %lf, with %ld steps, in %lf secs\n ", pi, num_steps, run_time);
 }
