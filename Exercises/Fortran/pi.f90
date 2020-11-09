@@ -32,7 +32,7 @@
   pi = step * sum
   run_time = OMP_GET_WTIME() - start_time
 
-  WRITE(*,100) pi, num_steps,  run_time
+  WRITE(*,100) num_steps, pi,  run_time
 100  FORMAT('pi with ',i14,' steps is ',f15.8,' in ',f8.3,' secs')
 
   END PROGRAM MAIN
