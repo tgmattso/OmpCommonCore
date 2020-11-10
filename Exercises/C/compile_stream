@@ -1,0 +1,2 @@
+icc -qopenmp -o stream stream.c
+icc -qopenmp -o stream_nft stream_nft.c
