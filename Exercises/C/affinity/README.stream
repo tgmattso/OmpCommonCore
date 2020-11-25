@@ -1,0 +1,25 @@
+1. The source codes
+
+"stream.c" is the STREAM benchmark code with first touch
+"stream_nft.c" is the STREAM benchmark code without first touch
+
+This README shows how to compile and run on a NERSC Cori XC40 system Haswell node using different number of threads (from 1 to 64) and compare results between:
+1) between with first touch and without first touch, both with OMP_PROC_BIND=close
+2) between OMP_PROC_BIND settings of spread and close, both with first touch 
+
+A Cori Haswell node has 2 sockets, 1 NUMA domain per socket, 16 physical cores per NUMA domain, and 2 hyperyhreads per physical core.
+
+2. Use Intel compiler to build:
+% icc -qopenmp -o stream stream.c
+% icc -qopenmp -o stream_nft stream_nft.c
+
+or use gcc compiler to build:
+% gcc -fopenmp -o stream stream.c
+% gcc -fopenmp -o stream_nft stream_nft.c
+
+3. To run by submitting a batch script
+% sbatch run_stream.sh
+
+here "run_stream.sh" is a batch script to do 5 sets of stream benchmark runs with various settings of number of OMP_NUM_THREADS, OMP_PROC_BIND, and OMP_PLACES settings, and capture the TRIAD memory bandwidth result.
+
+4. Check "sample_stream_result" to see a sample batch job output from the above run.
