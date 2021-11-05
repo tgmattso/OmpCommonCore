@@ -32,9 +32,9 @@ the following directories.
       this copy in the MakeDefs director and call it make.def
       
    
-Join the Slack workspace "OmpCommonCore-SC20" for the SC20 OpenMP Common Core Tutorial:
+Join the Slack workspace "OmpCommonCore-SC21" for the SC21 OpenMP Common Core Tutorial:
 
-	https://tinyurl.com/yyn3dxrl   
+	https://tinyurl.com/wcbbjjvt  
 	
 You can use any system with a working OpenMP compiler for the hands-on exercises
 in the "Exercises" directory.  The templates for "make.def" to be used for different 
@@ -44,15 +44,15 @@ Training accounts on the NERSC Cori system are provided from Nov 8 to Nov 16:
 
 -- Get an account on Cori
 
-	Apply for a training account (expires Nov 16, 2020) 
-	https://iris.nersc.gov/train use 4-letter code “bq2d”
+	Apply for a training account (effective Nov 10-18, 2021) 
+	https://iris.nersc.gov/train use 4-letter code “erKE”
 
 -- Obtain the exercises on Cori
 
 	% ssh trainxxx@cori.nersc.gov
 	% cd $SCRATCH
-	% cp -r /global/cfs/cdirs/training/2020/OpenMP_SC20 . (notice the “dot” at the end) 
-	% cd OpenMP_SC20/Exercises/C (or % cd OpenMP_SC20/Exercises/Fortran)
+	% cp -r /global/cfs/cdirs/training/2021/OpenMP_SC21 . (notice the “dot” at the end) 
+	% cd OpenMP_SC21/Exercises/C (or % cd OpenMP_SC21/Exercises/Fortran)
 	% make (for all codes)
 
 -- Compile on Cori
@@ -74,11 +74,10 @@ Training accounts on the NERSC Cori system are provided from Nov 8 to Nov 16:
 -- Run on Cori
 
 	Get on a compute node with an interactive batch session first
-	With a node reservation during the SC20 tutorial:
-	– Haswell node: % salloc -N 1 -C haswell -q regular -t 1:00:00 --reservation=omp_hsw -A ntrain
-	– KNL node: % salloc -N 1 -C knl -q regular -t 1:00:00 --reservation=omp_knl -A ntrain
-	(use --reservation=omp2_hsw and omp2_knl on Nov 10)
-
+	With a node reservation during the SC21 tutorial:
+	– Haswell node: % salloc -N 1 -C haswell -q regular -t 1:00:00 --reservation=omp_hsw -A ntrain3
+	– KNL node: % salloc -N 1 -C knl -q regular -t 1:00:00 --reservation=omp_knl -A ntrain3
+	
 	Without a node reservation outside the SC20 tutorial:
 	- Haswell node: % salloc -N 1 -C haswell -q interactive -t 30:00 
 	- KNL node: % salloc -N 1 -C knl -q interactive -t 30:00
