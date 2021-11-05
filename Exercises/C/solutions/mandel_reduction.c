@@ -12,7 +12,7 @@
 **            
 **  HISTORY: Written:  (Mark Bull, August 2011).
 **
-**           Changed "comples" to "d_comples" to avoid collsion with 
+**           Changed "complex" to "d_complex" to avoid collsion with 
 **           math.h complex type.   Fixed data environment errors
 **           (Tim Mattson, September 2011)
 **
@@ -44,7 +44,7 @@ int main ()
 
 // Loop over grid of points in the complex plane which contains the Mandelbrot set,
 // testing each point to see whether it is inside or outside the set.
-   omp_set_num_threads(8);
+   double initTime = omp_get_wtime();
    #pragma omp parallel for private(c,j) firstprivate(eps) reduction(+:numoutside)
       for (i = 0; i < NPOINTS; i++) { 
          for (j = 0; j < NPOINTS; j++) {
@@ -58,6 +58,9 @@ int main ()
    area = 2.0 * 2.5 * 1.125 * (double)(NPOINTS * NPOINTS      \
           - numoutside)/(double)(NPOINTS * NPOINTS);
    error = area / (double)NPOINTS; 
+ 
+   double runtime = omp_get_wtime() - initTime;
+   printf("runtime = %lf seconds with %d threads\n",runtime, omp_get_num_threads());
 
    printf("Area of Mandlebrot set = %12.8f +/- %12.8f\n",area,error);
    printf("Correct answer should be around 1.510659\n");
