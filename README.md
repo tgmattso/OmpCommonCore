@@ -44,7 +44,7 @@ Training accounts on the NERSC Cori system are provided from Nov 8 to Nov 16:
 
 -- Get an account on Cori
 
-      -- Apply for a NERSC Cori training account: https://iris.nersc.gov/train use 4-letter code ?erKE?
+      -- Apply for a NERSC Cori training account: https://iris.nersc.gov/train use 4-letter code erKE
       -- Join Slack: https://tinyurl.com/wcbbjjvt
 
 -- Obtain the exercises on Cori
