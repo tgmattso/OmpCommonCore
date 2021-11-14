@@ -40,13 +40,12 @@ You can use any system with a working OpenMP compiler for the hands-on exercises
 in the "Exercises" directory.  The templates for "make.def" to be used for different 
 architectuers are available in the "MakeDefs" directrory.
 	
-Training accounts on the NERSC Cori system are provided from Nov 8 to Nov 16:
+Training accounts on the NERSC Cori system are provided from Nov 14 to Nov 17:
 
 -- Get an account on Cori
 
-      -- Apply for a NERSC Cori training account: https://iris.nersc.gov/train use 4-letter code erKE
-      -- Join Slack: https://tinyurl.com/wcbbjjvt
-
+      -- Apply for a NERSC Cori training account: https://iris.nersc.gov/train use 4-letter code erkE
+    
 -- Obtain the exercises on Cori
 
 	% ssh trainxxx@cori.nersc.gov
