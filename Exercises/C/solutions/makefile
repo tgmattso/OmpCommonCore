@@ -7,7 +7,8 @@ include ../../../MakeDefs/make.def
 
 EXES=hello_par$(EXE) pi_spmd_simple$(EXE) pi_spmd_simple_padded$(EXE) \
      pi_spmd_final$(EXE) pi_loop$(EXE) mandel_par$(EXE) mandel_reduction$(EXE) \
-     pi_task$(EXE) racey_tasks$(EXE) pi_vec$(EXE) schro_prog$(EXE) 
+     pi_recur$(EXE) pi_task$(EXE) racey_tasks$(EXE) pi_vec$(EXE) \
+     schro_prog$(EXE) 
 
 all: $(EXES)
 
@@ -25,6 +26,9 @@ pi_spmd_final$(EXE): pi_spmd_final.$(OBJ)
 
 pi_loop$(EXE): pi_loop.$(OBJ) 
 	$(CLINKER) $(OPTFLAGS) -o pi_loop$(EXE) pi_loop.$(OBJ) $(LIBS)
+
+pi_recur$(EXE): pi_recur.$(OBJ) 
+	$(CLINKER) $(OPTFLAGS) -o pi_recur$(EXE) pi_recur.$(OBJ) $(LIBS)
 
 pi_vec$(EXE): pi_vec.$(OBJ) 
 	$(CLINKER) $(OPTFLAGS) -o pi_vec$(EXE) pi_vec.$(OBJ) $(LIBS)
