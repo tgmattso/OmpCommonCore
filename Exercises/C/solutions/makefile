@@ -8,12 +8,18 @@ include ../../../MakeDefs/make.def
 EXES=hello_par$(EXE) pi_spmd_simple$(EXE) pi_spmd_simple_padded$(EXE) \
      pi_spmd_final$(EXE) pi_loop$(EXE) mandel_par$(EXE) mandel_reduction$(EXE) \
      pi_recur$(EXE) pi_task$(EXE) racey_tasks$(EXE) pi_vec$(EXE) \
-     schro_prog$(EXE) 
+     schro_prog$(EXE) linked_notasks$(EXE) linked_tasks$(EXE) 
 
 all: $(EXES)
 
 hello_par$(EXE): hello_par.$(OBJ) 
 	$(CLINKER) $(OPTFLAGS) -o hello_par$(EXE) hello_par.$(OBJ) $(LIBS)
+
+linked_notasks$(EXE): linked_notasks.$(OBJ) 
+	$(CLINKER) $(OPTFLAGS) -o linked_notasks$(EXE) linked_notasks.$(OBJ) $(LIBS)
+
+linked_tasks$(EXE): linked_tasks.$(OBJ) 
+	$(CLINKER) $(OPTFLAGS) -o linked_tasks$(EXE) linked_tasks.$(OBJ) $(LIBS)
 
 pi_spmd_simple$(EXE): pi_spmd_simple.$(OBJ) 
 	$(CLINKER) $(OPTFLAGS) -o pi_spmd_simple$(EXE) pi_spmd_simple.$(OBJ) $(LIBS)
@@ -57,6 +63,8 @@ test: $(EXES)
 	$(PRE)mandel_par$(EXE) 
 	$(PRE)pi_task$(EXE)  
 	$(PRE)racey_tasks$(EXE) 
+	$(PRE)linked_notasks$(EXE) 
+	$(PRE)linked_tasks$(EXE) 
 	$(PRE)schro_prog$(EXE) 
 	$(PRE)pi_vec$(EXE)  
 
