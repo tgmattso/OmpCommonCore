@@ -8,7 +8,7 @@ include ../../MakeDefs/make.def
 
 # Note Stream doesn't work on Apple systems due to a 
 # problem with the timing infrastructure.  
-EXES=hello$(EXE) pi$(EXE) pi_recur$(EXE) mandel$(EXE)  \
+EXES=hello$(EXE) pi$(EXE) pi_recur$(EXE) mandel$(EXE) racey$(EXE)  \
 #	 stream$(EXE) stream_nft$(EXE) 
 
 all: $(EXES)
@@ -24,6 +24,9 @@ pi_recur$(EXE): pi_recur.$(OBJ)
 
 mandel$(EXE):  mandel.$(OBJ) 
 	$(FLINKER) $(OPTFLAGS) -o mandel mandel.$(OBJ) $(LIBS)
+
+racey$(EXE):  racey.$(OBJ) 
+	$(FLINKER) $(OPTFLAGS) -o racey racey.$(OBJ) $(LIBS)
 
 stream$(EXE):  mysecond.$(OBJ) stream.$(OBJ)
 	$(FLINKER) $(OPTFLAGS) -o stream mysecond.$(OBJ) stream.$(OBJ) $(LIBS)
