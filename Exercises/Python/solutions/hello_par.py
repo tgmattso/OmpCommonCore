@@ -1,4 +1,3 @@
-par.py
 from numba import njit
 from numba.openmp import openmp_context as openmp
 
