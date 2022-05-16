@@ -2,8 +2,9 @@
           USE OMP_LIB
           IMPLICIT NONE
 
-          INTEGER :: i, id, nthreads
+          INTEGER :: i, id
           INTEGER, PARAMETER :: num_steps=100000000
+          INTEGER :: NTHREADS = 4
           REAL*8 :: x, pi, sum, step
           REAL*8 :: start_time, run_time
 
