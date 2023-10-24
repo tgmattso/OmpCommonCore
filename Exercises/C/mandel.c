@@ -10,6 +10,7 @@
 **  HISTORY: Written:  (Mark Bull, August 2011).
 **           Changed "comples" to "d_comples" to avoid collsion with 
 **           math.h complex type (Tim Mattson, September 2011)
+**           Removed complex types & filescope vars for creal/cimag (TGM 2023)
 */
 
 #include <stdio.h>
@@ -20,60 +21,55 @@
 # define NPOINTS 1000
 # define MAXITER 1000
 
-void testpoint(void);
+void testpoint(double, double);
 
-struct d_complex {
-   double r;
-   double i;
-};
-
-struct d_complex c;
 int numoutside = 0;
 
-int main() {
+int main(){
    int i, j;
-   double area, error, eps = 1.0e-5;
+   double area, error, eps  = 1.0e-5;
+   double cimag, creal;
 
-// Loop over grid of points in the complex plane which contains 
-// the Mandelbrot set, test each point to see whether it is 
-// inside or outside the set
 
-#pragma omp parallel for private(c,eps)
-   for (i = 0; i < NPOINTS; i++) {
-      for (j = 0; j < NPOINTS; j++) {
-         c.r = -2.0 + 2.5 * (double)(i) / (double)(NPOINTS) + eps;
-         c.i = 1.125 * (double)(j) / (double)(NPOINTS) + eps;
-         testpoint();
-      }
+//   Loop over grid of points in the complex plane which contains the Mandelbrot set,
+//   testing each point to see whether it is inside or outside the set.
+
+#pragma omp parallel for private(eps)
+   for (i=0; i<NPOINTS; i++) {
+     for (j=0; j<NPOINTS; j++) {
+       creal = -2.0+2.5*(double)(i)/(double)(NPOINTS)+eps;
+       cimag = 1.125*(double)(j)/(double)(NPOINTS)+eps;
+       testpoint(creal, cimag);
+     }
    }
 
 // Calculate area of set and error estimate and output the results
    
-   area = 2.0 * 2.5 * 1.125 * (double)(NPOINTS * NPOINTS - numoutside) 
-         / (double)(NPOINTS * NPOINTS);
-   error = area / (double)NPOINTS;
+area=2.0*2.5*1.125*(double)(NPOINTS*NPOINTS-numoutside)/(double)(NPOINTS*NPOINTS);
+   error=area/(double)NPOINTS;
 
    printf("Area of Mandlebrot set = %12.8f +/- %12.8f\n",area,error);
-   printf("Correct answer should be around 1.506\n");
+   printf("Correct answer should be around 1.510659\n");
+
 }
-void testpoint(void) {
 
-// Does the iteration z=z*z+c, until |z| > 2 when point is known to 
-// be outside set. If loop count reaches MAXITER, point is considered 
-// to be inside the set.
+void testpoint(double creal, double cimag){
 
-   struct d_complex z;
-   int iter;
-   double temp;
+// iterate z=z*z+c, until |z| > 2 when point is known to be outside set
+// If loop count reaches MAXITER, point is considered to be inside the set
 
-   z = c;
-   for (iter = 0; iter < MAXITER; iter++) {
-      temp = (z.r * z.r) - (z.i * z.i) + c.r;
-      z.i = z.r * z.i * 2 + c.i;
-      z.r = temp;
-      if ((z.r * z.r + z.i * z.i) > 4.0) {
-         numoutside++;
-         break;
-      }
-   }
+       double zreal, zimag, temp;
+       int iter;
+       zreal = creal;  zimag = cimag;
+
+       for (iter=0; iter<MAXITER; iter++){
+         temp = (zreal*zreal)-(zimag*zimag)+creal;
+         zimag = zreal*zimag*2+cimag;
+         zreal = temp;
+         if ((zreal*zreal+zimag*zimag)>4.0) {
+           numoutside++;
+           break;
+         }
+       }
 }
+
