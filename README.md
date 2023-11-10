@@ -30,7 +30,8 @@ the following directories.
       one that is close to what you need, and modify it
       to reference the compilers you wish to use.  Put
       this copy in the MakeDefs directory and call it make.def
-	
+     (for Perlmutter, copy perlmutter_gnu.def to be make.def)
+
 You can use any system with a working OpenMP compiler for the hands-on exercises
 in the "Exercises" directory.  The templates for "make.def" to be used for different 
 architectures are available in the "MakeDefs" directory.
@@ -39,13 +40,13 @@ Training accounts on the NERSC Perlmutter system for SC23 are provided from Nov 
 
 -- Get an account on Perlmutter
 
-      -- Apply for a NERSC Cori training account: https://iris.nersc.gov/train use 4-letter code: epg6
+      -- Apply for a NERSC training account: https://iris.nersc.gov/train use 4-letter code: epg6
     
 -- Obtain the exercises on Perlmutter
 
 	% ssh trainxxx@perlmutter.nersc.gov
 	% cd $SCRATCH
-	% cp -r /global/cfs/cdirs/training/2022/OpenMP_SC23 . (notice the “dot” at the end) 
+	% cp -r /global/cfs/cdirs/training/2023/OpenMP_SC23 . (notice the “dot” at the end) 
 	% cd OpenMP_SC23/Exercises/C (or % cd OpenMP_SC23/Exercises/Fortran)
 	% make (for all codes)
 

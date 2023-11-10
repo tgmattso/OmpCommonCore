@@ -1,15 +1,16 @@
-# for the gnu compiler on Cori (Xeon CPU based system at NERSC)
+# for intel compiler on Cori (Xeon CPU based system at NERSC)
+# copy to make.def
 
 FC          = ftn
 CC          = cc
 CLINKER     = $(CC)
 FLINKER     = $(FC)
-OPTFLAGS    = -fopenmp -O0 
+OPTFLAGS    = -mp -O0 
 LIBS        = -lm
 PRE         = ./
 
-FFLAGS	  = $(OPTFLAGS)
 CFLAGS	  = $(OPTFLAGS)
+FFLAGS	  = $(OPTFLAGS)
 
 OBJ=o
 EXE=
