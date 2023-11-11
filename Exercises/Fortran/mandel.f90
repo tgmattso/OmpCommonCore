@@ -10,6 +10,8 @@
 !           Changed "comples" to "d_comples" to avoid collsion with 
 !           math.h complex type (Tim Mattson, September 2011)
 !           Adapted to Fortran90 code (Helen He, September 2017)
+!	    Simplified Fortran90 code based on Tim's corresponding
+!           simplification in C (Helen He, November 2023)
 
 
   MODULE  mandel_module
@@ -17,38 +19,31 @@
 
   INTEGER, PARAMETER :: DP = SELECTED_REAL_KIND(14)
 
-  REAL(KIND = DP) :: r
-
   INTEGER, PARAMETER :: NPOINTS=1000
   INTEGER, PARAMETER :: MAXITER=1000
   INTEGER :: numoutside=0
 
-  TYPE d_complex
-     REAL(KIND = DP) :: r
-     REAL(KIND = DP) :: i
-  END TYPE d_complex
-
-  TYPE(d_complex) :: c
-
   contains 
 
-     SUBROUTINE testpoint()
+     SUBROUTINE testpoint(creal, cimag)
 
 ! Does the iteration z=z*z+c, until |z| > 2 when point is known to be outside set
 ! If loop count reaches MAXITER, point is considered to be inside the set
 
-     TYPE(d_complex) :: z
      INTEGER :: iter
      REAL(KIND = DP) :: temp
+     REAL(KIND = DP) :: zreal, zimag
+     REAL(KIND = DP) :: creal, cimag
 
-     z = c
+     zreal = creal
+     zimag = cimag
 
      DO iter = 1, MAXITER
-        temp = (z%r*z%r)-(z%i*z%i)+c%r
-        z%i = z%r*z%i*2+c%i
-        z%r = temp
+        temp = (zreal*zreal)-(zimag*zimag)+creal
+        zimag = zreal*zimag*2+cimag
+        zreal = temp
 
-        IF ((z%r*z%r+z%i*z%i)>4.0) THEN 
+        IF ((zreal*zreal+zimag*zimag)>4.0) THEN 
            numoutside = numoutside + 1
            EXIT
         ENDIF
@@ -66,6 +61,7 @@
   INTEGER :: i, j
   REAL(KIND = DP) :: area, error
   REAL(KIND = DP) :: eps = 1.0e-5
+  REAL(KIND = DP) :: creal, cimag
 
 ! Loop over grid of points in the complex plane which contains the Mandelbrot set,
 ! testing each point to see whether it is inside or outside the set.
@@ -74,9 +70,9 @@
 
   DO i = 1, NPOINTS
   DO j = 1, NPOINTS
-     c%r = -2.0+2.5*DBLE(i-1)/DBLE(NPOINTS)+eps
-     c%i = 1.125*DBLE(j-1)/DBLE(NPOINTS)+eps
-     CALL testpoint()
+     creal = -2.0+2.5*DBLE(i-1)/DBLE(NPOINTS)+eps
+     cimag = 1.125*DBLE(j-1)/DBLE(NPOINTS)+eps
+     CALL testpoint(creal, cimag)
   ENDDO
   ENDDO
 !$OMP END PARALLEL DO
